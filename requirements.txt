@@ -1,0 +1,4 @@
+pandas==1.1.0
+pickle==4.0
+altair==4.1.0
+streamlit==0.64.0
