@@ -31,14 +31,14 @@ elif today.dayofweek == 2:
     nextThursday25 = (poland["Count"].iloc[-7] + 9600 - poland["Count"].iloc[-1])/8   
 elif today.dayofweek == 3:
     if currentratio > 25:
-        thisThursday16 = "Border will be closed for non-Lithuanians next week, mandatory self-isolation for Lithuanians imposed"
-        thisThursday25 = "Border will be closed for non-Lithuanians next week, mandatory self-isolation for Lithuanians imposed"
+        thisThursday16 = "Mandatory self-isolation + testing next week"
+        thisThursday25 = "Mandatory self-isolation + testing next week"
     elif currentratio < 16:
         thisThursday16 = "Borders will be open next week"
         thisThursday25 = "Borders will be open next week"
     else:
-        thisThursday16 = "Mandatory self-isolation upon arrival to Lithuania next week"
-        thisThursday25 = "Mandatory self-isolation upon arrival to Lithuania next week"
+        thisThursday16 = "Mandatory self-isolation (no testing) upon arrival to Lithuania next week"
+        thisThursday25 = "Mandatory self-isolation (no testing) upon arrival to Lithuania next week"
     nextThursday16 = (poland["Count"].iloc[-8] + 6144 - poland["Count"].iloc[-1])/7
     nextThursday25 = (poland["Count"].iloc[-8] + 9600 - poland["Count"].iloc[-1])/7
 elif today.dayofweek == 4:
@@ -82,27 +82,39 @@ As of {today.date()}, this ratio stands at *{currentratio}*""")
 st.header("What's going to happen in the next week?")
 st.write(f"Today, Poland recorded {todaycases} new cases.")
 
-if thisThursday16 < 0:
-    st.write("There is no chance of complete border opening next week.")
-else: 
-    st.write(f"For borders to be open without restrictions next week, no more than {thisThursday16} new cases daily must be registered on average by Friday.")
+try:
+    if thisThursday16 < 0:
+        st.write("There is no chance of complete border opening next week.")
+    else: 
+        st.write(f"For borders to be open without restrictions next week, no more than {thisThursday16} new cases daily must be registered on average by Friday.")
+except:
+    st.write(thisThursday16)
+ 
+try:
+    if thisThursday25 < 0:
+        st.write("Mandatory self-isolation + testing next week")
+    else:
+        st.write(f"For testing not to be mandatory next week, no more than {thisThursday25} new cases daily must be registered on average by Friday.")
+except:
+    st.write(thisThursday25)
     
-if thisThursday25 < 0:
-    st.write("Mandatory self-isolation + testing next week")
-else:
-    st.write(f"For testing not to be mandatory next week, no more than {thisThursday25} new cases daily must be registered on average by Friday.")
-
 st.header("And week after the next week?")
 
-if nextThursday16 < 0:
-    st.write("There is no chance of complete border opening the week after next week.")
-else: 
-    st.write(f"For borders to be open without restrictions the week after next week, no more than {nextThursday16} new cases daily must be registered on average by Friday next week.")
-
-if nextThursday25 < 0:
-    st.write("Mandatory self isolation + testing the week after next week.")
-else:
-    st.write(f"For testing not to be mandatory the week after next week, no more than {nextThursday25} new cases daily must be registered on average by Friday next week.")
+try:
+    if nextThursday16 < 0:
+        st.write("There is no chance of complete border opening the week after next week.")
+    else: 
+        st.write(f"For borders to be open without restrictions the week after next week, no more than {nextThursday16} new cases daily must be registered on average by Friday next week.")
+except:
+    st.write(nextThursday16)
+    
+try:    
+    if nextThursday25 < 0:
+        st.write("Mandatory self isolation + testing the week after next week.")
+    else:
+        st.write(f"For testing not to be mandatory the week after next week, no more than {nextThursday25} new cases daily must be registered on average by Friday next week.")
+except:
+    st.write(nextThursday25)
 
 st.header("How did this ratio change over time?")
 # st.line_chart(ratios["Ratio"])
