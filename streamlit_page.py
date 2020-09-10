@@ -7,7 +7,7 @@ poland = pickle.load(open("cases_pickle.p", "rb" ))
 ratios = pickle.load(open("ratios.p", "rb" ))
 
 now = pd.to_datetime("today").date()
-today = pd.to_datetime(now)
+today = pd.to_datetime(poland["Date"].iloc[-1]) #this is not actual today, but the last day available
 # today.dayofweek
   
 currentratio = (poland["Count"].iloc[-1] - poland["Count"].iloc[-15])/384
