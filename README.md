@@ -4,3 +4,4 @@ Real-time tracking of numbers essential for Polish-Lithuanian border opening in 
 # TODO
 - Write readme
 - Fix bugs
+- Update with new requirements from 11/09
